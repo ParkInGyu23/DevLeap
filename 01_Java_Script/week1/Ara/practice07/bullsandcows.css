@@ -1,0 +1,20 @@
+.bullsandcows .input_wrap {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+.bullsandcows .input_wrap input {
+  width: 200px;
+  height: 30px;
+  font-size: 20px;
+  padding: 10px;
+  box-sizing: border-box;
+}
+.bullsandcows .input_wrap button {
+  width: 80px;
+  height: 30px;
+}
+.bullsandcows .result_wrap {
+  font-size: 20px;
+  margin-top: 10px;
+}
