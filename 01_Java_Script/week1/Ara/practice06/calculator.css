@@ -1,0 +1,32 @@
+.calculator {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  gap: 10px;
+  max-width: 230px;
+}
+.calculator input {
+  height: 50px;
+  font-size: 20px;
+  color: #000;
+  padding: 10px;
+  box-sizing: border-box;
+}
+.calculator input.operator {
+  width: 50px;
+}
+.calculator input.number {
+  grid-column: 2 / 5;
+}
+.calculator button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 50px;
+  height: 50px;
+  font-size: 22px;
+  margin: 0;
+  padding: 0;
+  background-color: lightgray;;
+  border: 1px solid #000;
+  cursor: pointer;
+}
