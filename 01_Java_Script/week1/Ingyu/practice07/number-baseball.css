@@ -1,0 +1,21 @@
+.numberBaseball .input_Section {
+    display: flex;
+    align-items: center;
+}
+
+.numberBaseball .input_Section input {
+    width: 300px;
+    height: 30px;
+    box-sizing: border-box;
+    font-size: 22px;
+    margin-right: 10px;
+}
+
+.numberBaseball .input_Section button {
+    width: 50px;
+    height: 30px;
+}
+
+.numberBaseball .result_Section {
+    font-size: 22px;
+}
