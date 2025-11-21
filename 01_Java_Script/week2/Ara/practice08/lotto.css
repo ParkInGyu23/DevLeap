@@ -1,0 +1,18 @@
+.lotto .input_wrap {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+.lotto .winning_numbers, .lotto .bonus_number {
+  display: flex;
+  gap: 10px;
+}
+.lotto .winning_numbers span, .lotto .bonus_number span  {
+  display: inline-block;
+  width: 30px;
+  height: 30px;
+  line-height: 30px;
+  text-align: center;
+  border: 1px solid #000;
+  border-radius: 100%;
+}
