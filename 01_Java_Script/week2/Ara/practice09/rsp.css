@@ -1,0 +1,12 @@
+.rsp {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+.rsp .computer {
+    width: 165px;
+    height: 200px;
+    background-size: auto 200px;
+    background-position-y: 200px;
+    background-image: url(./asstes/rsp.png);
+}
