@@ -1,0 +1,31 @@
+#computer {
+  width: 165px;
+  height: 200px;
+}
+
+#restart {
+  display: none;
+  margin-top: 10px;
+  padding: 8px 14px;
+  border: none;
+  background-color: #3692ff;
+  color: white;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+#result {
+  margin-top: 10px;
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.btn {
+  margin-top: 10px;
+  padding: 8px 14px;
+  border: none;
+  background-color: #3692ff;
+  color: white;
+  border-radius: 6px;
+  cursor: pointer;
+}
