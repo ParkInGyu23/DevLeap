@@ -1,0 +1,61 @@
+body {
+    font-family: Pretendard, sans-serif;
+    padding: 30px;
+    background: #f6f7fb;
+}
+
+.lotto_form {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.lotto_form input {
+    flex: 0 0 500px;
+    padding: 10px 15px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    font-size: 16px;
+}
+
+.lotto_form button {
+    padding: 10px 20px;
+    background: #4b7bec;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+}
+.lotto_form button:hover {
+    background: #3867d6;
+}
+
+.my_numbers, .result, .bonus {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-top: 15px;
+    font-size: 18px;
+}
+
+/* 공 스타일 */
+.ball {
+    width: 45px;
+    height: 45px;
+    background: #fff;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: 700;
+    border: 2px solid #ddd;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+/* 번호 색상 나누기 */
+.ball[data-color="yellow"] { background: #ffeaa7; }
+.ball[data-color="orange"] { background: #ffca74; }
+.ball[data-color="blue"] { background: #2f41e6; }
+.ball[data-color="red"] { background: #ff7675; }
+.ball[data-color="green"] { background: #55efc4; }
+.ball[data-color="purple"] { background: #a29bfe; }

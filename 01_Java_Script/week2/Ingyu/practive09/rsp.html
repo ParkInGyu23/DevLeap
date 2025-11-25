@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>가위바위보</title>
+    <!-- CSS 추가 -->
+    <link rel="stylesheet" href="./rsp.css">
+    <!-- JS 추가 -->
+    <script src="./rsp.js"></script>
+</head>
+<body>
+    <div class="rsp">
+        <div class="computer"></div>
+
+        <div class="btn_wrap">
+            <button class="button" id="scissors">가위</button>
+            <button class="button" id="rock">바위</button>
+            <button class="button" id="paper">보</button>
+        </div>
+
+        <div class="score">현재 점수</div>
+
+        <div class="scoreboard">
+            <p>판 수: <span id="round">0</span> / 5</p>
+            <p>나의 승수: <span id="myWin">0</span></p>
+            <p>컴퓨터 승수: <span id="comWin">0</span></p>
+        </div>
+
+        <div class="final"></div>
+    </div>
+</body>
+</html>
