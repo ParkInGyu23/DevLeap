@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>변수 네이밍 컨벤션 가이드</title>
+    <style>
+        body {
+            font-family: Pretendard, sans-serif;
+            line-height: 1.6;
+            max-width: 900px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+        h1, h2, h3 {
+            color: #333;
+        }
+        pre {
+            background: #f5f5f5;
+            padding: 15px;
+            border-radius: 6px;
+            overflow-x: auto;
+        }
+        code {
+            font-family: Consolas, monospace;
+            color: #c7254e;
+        }
+        .section {
+            margin-bottom: 40px;
+        }
+        .highlight {
+            color: #0077ff;
+            font-weight: bold;
+        }
+        ul {
+            margin-left: 20px;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>변수 네이밍 컨벤션 가이드 (JavaScript)</h1>
+
+    <div class="section">
+        <h2>🎯 1. 기본 원칙</h2>
+
+        <h3>✔ 이름만 보고도 의미가 전달되어야 한다</h3>
+        <ul>
+            <li>❌ a, b, x1, temp</li>
+            <li>✔ userName, scoreBoard, isRunning</li>
+        </ul>
+
+        <h3>✔ 카멜케이스(camelCase) 사용</h3>
+        <pre><code>let userName;
+let currentScore;
+let maxSpeed;</code></pre>
+
+        <h3>✔ 변수는 구체적일수록 좋다</h3>
+        <ul>
+            <li>❌ value → ✔ inputValue</li>
+            <li>❌ result → ✔ winningResult</li>
+        </ul>
+    </div>
+
+    <div class="section">
+        <h2>🎯 2. 접두사(prefix) 규칙</h2>
+
+        <h3>✔ DOM 요소 → $ 붙이기</h3>
+        <pre><code>const $button = document.querySelector('.btn');
+const $input = document.querySelector('#userInput');</code></pre>
+
+        <h3>✔ Boolean → is / has / can / should</h3>
+        <pre><code>let isLoading = false;
+let hasPermission = true;</code></pre>
+
+        <h3>✔ 숫자 → count / total / index</h3>
+        <pre><code>let count = 0;
+let totalScore = 120;
+let currentIndex = 2;</code></pre>
+
+        <h3>✔ 배열 → s로 끝나는 복수형</h3>
+        <pre><code>let users = [];
+let items = [];</code></pre>
+
+        <h3>✔ 함수는 동사로 시작</h3>
+        <pre><code>function getUser() {}
+function renderUI() {}
+function startGame() {}</code></pre>
+
+        <h3>✔ 클래스(PascalCase)</h3>
+        <pre><code>class UserProfile {}
+class GameManager {}</code></pre>
+
+        <h3>✔ 상수(CONSTANT) → 전부 대문자</h3>
+        <pre><code>const API_URL = "https://...";
+const TIME_LIMIT = 30;</code></pre>
+    </div>
+
+    <div class="section">
+        <h2>🎯 3. 역할별 네이밍 패턴</h2>
+
+        <h3>✔ 상태(state) 객체</h3>
+        <pre><code>const state = {
+  score: 0,
+  round: 0,
+  isRunning: false,
+  currentUser: null,
+};</code></pre>
+
+        <h3>✔ 이벤트 핸들러 → on</h3>
+        <pre><code>function onClickButton() {}
+function onSubmitForm() {}
+function onInputChange() {}</code></pre>
+
+        <h3>✔ DOM 조작 → render / update / show / hide</h3>
+        <pre><code>function renderScoreboard() {}
+function updateUserInfo() {}
+function showModal() {}
+function hideMenu() {}</code></pre>
+    </div>
+
+    <div class="section">
+        <h2>🎯 4. 피해야 하는 네이밍</h2>
+        <ul>
+            <li>❌ 너무 짧은 이름 (a, b, x)</li>
+            <li>❌ 의미 없는 이름 (temp, data, value)</li>
+            <li>❌ 타입 중복 (arrayList, userObject)</li>
+            <li>❌ 타입을 이름에 넣기 (userArray 대신 users)</li>
+        </ul>
+    </div>
+
+    <div class="section">
+        <h2>🎯 5. 실전 예시</h2>
+        <pre><code>const $computer = document.querySelector('.computer');
+const $scoreBoard = document.querySelector('.score');
+
+let userWinCount = 0;
+let computerWinCount = 0;
+let currentRound = 0;
+let isClickable = true;
+
+function startGame() {}
+function stopGame() {}
+function renderComputerHand() {}
+function judgeWinner() {}</code></pre>
+    </div>
+
+    <h2>🎉 결론</h2>
+    <p>
+        좋은 변수 네이밍은 코드 품질을 크게 높여준다.<br>
+        ✔ camelCase<br>
+        ✔ boolean → is/has<br>
+        ✔ 배열 → 복수형<br>
+        ✔ DOM → $<br>
+        ✔ 함수 → 동사<br>
+        ✔ 상수 → 대문자<br>
+        <br>
+        이 규칙만 지켜도 '프로 개발자 같은 코드'를 작성할 수 있다!
+    </p>
+
+</body>
+</html>
