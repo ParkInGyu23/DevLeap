@@ -82,6 +82,6 @@ const clickButton = (event) => {
     }, 1000);
   }
 };
-$rock.addEventListener('click, clickButton');
-$scissors.addEventListener('click, clickButton');
-$paper.addEventListener('click, clickButton');
+$rock.addEventListener('click', clickButton);
+$scissors.addEventListener('click', clickButton);
+$paper.addEventListener('click', clickButton);
