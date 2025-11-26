@@ -1,0 +1,35 @@
+body {
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+}
+.response_check {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  gap: 20px;
+  width: 100%;
+  height: 100%;
+  cursor: pointer;
+}
+.response_check.waiting {
+  background-color: #0080FF;
+}
+.response_check.start {
+  background-color: #C92519;
+}
+.response_check.change {
+  background-color: #00A86B;
+}
+.response_check.end {
+  background-color: #FF9B49;
+}
+.response_check .text {
+  font-size: 20px;
+  font-weight: 500;
+}
+.response_check .result, .response_check .rank {
+  font-size: 18px;
+  font-weight: 400;
+}
