@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>텍스트 롤플레잉 게임</title>
+  <!-- CSS -->
+  <link rel="stylesheet" href="./text-rpg.css">
+  <!-- JS -->
+  <script src="./text-rpg.js"></script>
+  <!-- <script src="./selfcheck.js"></script> -->
+</head>
+<body>
+  <div class="text_rpg">
+  
+    <div class="start_screen">
+      <form>
+        <input type="text" class="name_input" name="name_input" placeholder="주인공 이름을 입력하세요!" />
+        <button class="start_button">시작</button>
+      </form>
+    </div>
+    
+    <div class="screen">
+      <div class="hero_start">
+        <div class="hero_title">내 정보</div>
+        <div class="hero_name"></div>
+        <div class="hero_level"></div>
+        <div class="hero_hp"></div>
+        <div class="hero_xp"></div>
+        <div class="hero_att"></div>
+      </div>
+      <form class="game_menu">
+        <div class="menu_1">1. 모험</div>
+        <div class="menu_2">2. 휴식</div>
+        <div class="menu_3">3. 종료</div>
+        <input type="text" class="menu_input" name="menu_input" placeholder="숫자를 입력해주세요." />
+        <button class="menu_button">입력</button>
+      </form>
+      <form class="battle_menu">
+        <div class="battle_1">1. 공격</div>
+        <div class="battle_2">2. 회복</div>
+        <div class="battle_3">3. 도망</div>
+        <input type="text" class="battle_input" name="battle_input" placeholder="숫자를 입력해주세요." />
+        <button class="battle_button">입력</button>
+      </form>
+      <div class="message"></div>
+      <div class="monster_start">
+        <div class="monster_title">몬스터 정보</div>
+        <div class="monster_name"></div>
+        <div class="monster_hp"></div>
+        <div class="monster_att"></div>
+      </div>
+    </div>
+    
+  </div>
+</body>
+</html>

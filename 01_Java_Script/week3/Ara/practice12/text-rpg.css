@@ -1,0 +1,33 @@
+.screen, .game_menu, .battle_menu, .monster_start {
+  display: none;
+  margin-bottom: 20px;
+}
+.hero_start {
+  display: inline-block;
+   margin-bottom: 20px;
+}
+.hero_start, .monster_start {
+  padding: 5px;
+  border: 1px solid #000;
+  border-radius: 5px;
+}
+.hero_start .hero_title, .monster_start .monster_title {
+  font-size: 18px;
+  font-weight: 500;
+  margin-bottom: 10px;
+}
+
+form {
+  display: flex;
+  gap: 20px;
+  align-items: center;
+}
+
+input, button {
+  height: 30px;
+  box-sizing: border-box;
+}
+
+.message {
+  margin-bottom: 20px;
+}
