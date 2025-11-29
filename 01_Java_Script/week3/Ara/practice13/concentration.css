@@ -1,0 +1,36 @@
+.concentration {
+  width: 400px;
+}
+.card {
+  display: inline-block;
+  width: 80px;
+  height: 100px;
+  margin-right: 20px;
+  margin-bottom: 20px;
+  perspective: 140px;
+  cursor: pointer;
+}
+.card_inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  transition: transform 0.8s;
+  transform-style: preserve-3d;
+}
+.card.flipped .card_inner {
+  transform: rotateY(180deg)
+}
+.card_back {
+  background-color: black;
+}
+.card_front, .card_back {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  border: 1px solid black;
+  backface-visibility: hidden;
+}
+.card_front {
+  transform: rotateY(180deg);
+}
