@@ -1,0 +1,28 @@
+#screen {
+  width: 300px;
+  height: 200px;
+  text-align: center;
+  user-select: none;
+}
+
+#screen.waiting {
+  background-color: aqua;
+}
+
+#screen.ready {
+  background-color: red;
+  color: #fff;
+}
+
+#screen.now {
+  background-color: greenyellow;
+}
+
+.wrong-click {
+  color: red;
+  font-size: 20px;
+}
+
+#top5 {
+  white-space: pre-line;
+}
