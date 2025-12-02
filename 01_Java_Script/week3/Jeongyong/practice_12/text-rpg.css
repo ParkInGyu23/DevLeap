@@ -1,0 +1,15 @@
+#game-menu {
+  display: none;
+}
+
+#battle-menu {
+  display: none;
+}
+
+#hero-stat {
+  display: none;
+}
+
+#message {
+  white-space: pre-line;
+}
