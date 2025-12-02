@@ -1,0 +1,37 @@
+table {
+  border-collapse: collapse;
+  margin: 12px 0;
+}
+
+td {
+  border: 1px solid black;
+  width: 72px;
+  height: 72px;
+  font-size: 36px;
+  cursor: pointer;
+  text-align: center;
+}
+
+td:hover {
+  background-color: #f7f7f7;
+}
+
+button {
+  border: none;
+  padding: 10px 20px;
+  border-radius: 16px;
+  background-color: aqua;
+  margin-left: 43px;
+  cursor: pointer;
+}
+
+body {
+  margin: 250px auto;
+  width: 200px;
+  height: 200px;
+}
+
+div {
+  font-size: 20px;
+  margin-left: 50px;
+}
