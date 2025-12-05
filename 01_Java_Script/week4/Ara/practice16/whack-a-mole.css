@@ -1,0 +1,44 @@
+.cell {
+  position: relative;
+  display: inline-block;
+  width: 200px;
+  height: 200px;
+  background: 'yellow';
+  overflow: hidden;
+}
+.gopher, .bomb {
+  position: absolute;
+  bottom: 0;
+  width: 200px;
+  height: 200px;
+  transition: bottom 1s;
+}
+.gopher {
+  background: url('./img/gopher.png') no-repeat center / 200px 200px;
+}
+.dead {
+  background: url('./img/dead_gopher.png') no-repeat center / 200px 200px;
+}
+.bomb {
+  background: url('./img/bomb.png') no-repeat center / 200px 200px;
+}
+.boom {
+  background: url('./img/explode.png') no-repeat center / 200px 200px;
+}
+.hidden {
+  bottom: -200px;
+}
+.hole {
+  position: absolute;
+  bottom: 0;
+  width: 200px;
+  height: 150px;
+  background: url('./img/mole-hole.png') no-repeat center / 200px 150px;
+}
+.hole_front {
+  position: absolute;
+  bottom: 0;
+  width: 200px;
+  height: 30px;
+  background: url('./img/mole-hole-front.png') no-repeat center / 200px 30px;
+}
