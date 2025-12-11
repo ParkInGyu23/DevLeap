@@ -1,7 +1,11 @@
 # Week 1 개인 정리
 
 ## ✏️ 배운 내용 요약
-  ### 3.2 컴포넌트의 종류
+
+  ### 3장 컴포넌트
+  
+  #### 3.2 컴포넌트의 종류
+  
     - 클래스 컴포넌트
     
     ```js
@@ -27,7 +31,8 @@
     : 리액트 16.8 이전에는 상태 관리나 생명주기 기능을 구현하려면 클래스 컴포넌트를 반드시 사용해야 했습니다.
     과거에는 클래스 컴포넌트가 표준 방식이였지만 **지금은 함수형 컴포넌트가 표준**처럼 자리 잡았습니다. 
     
-  ### 3.3 컴포넌트 기초
+  #### 3.3 컴포넌트 기초
+  
   확장자별 JSX 지원 여부
   | 확장자  | CRA | VITE |
   |--------|-----|------|
@@ -36,7 +41,7 @@
   | .ts    | .JSX 지원 안 함 | .JSX 지원 안 함 |
   | .tsx    | .JSX 지원 | .JSX 지원 |
   
-  ### 3.4 컴포넌트와 props 객체
+  #### 3.4 컴포넌트와 props 객체
   
   ```js
     interface UserProps { // 인터페이스로 props 타입 분리
@@ -64,7 +69,8 @@
   이 파일은 따로 import 하지 않아도 사용할 수 있습니다.
   실무에서 자주 활용하므로 타입 정의 방식이 있다는 것을 알아두어야 합니다.
   
-  ### 3.5 컴포넌트와 이벤트
+  #### 3.5 컴포넌트와 이벤트
+  
   리액트 주요 이벤트 속성
   | 구분 | 이벤트 | 설명 |
   |------|---------|-------|
@@ -93,16 +99,237 @@
   |  | onError | 로드 중 오류가 발생했을 때 호출 |
   |  | onScroll | 요소가 스크롤될 때 호출 |
   
-  ### 3.5.4 이벤트 전파
+  #### 3.5.4 이벤트 전파
   - 캡쳐링 : 이벤트가 부모 요소에서 시작해 자식 요소로 내려가는 방식입니다.
   이벤트 속성에 Capture를 붙인 ex) onClick -> onClickCapture 으로 사용합니다.
   - 버블링 : 이벤트가 자식 요소에서 시작해 부모 요소로 전파되는 방식입니다.
   별도의 이벤트 속성이 필요하지 않아서 속성 이름을 그대로 사용하면 됩니다.
-  단, 리액트에서는 버블링이 기본 동작이므로 버블링을 차단하려면 stopPropagation() 메서드를 사용해야합니다.  
-
+  단, 리액트에서는 버블링이 기본 동작이므로 버블링을 차단하려면 stopPropagation() 메서드를 사용해야합니다.
   
+  ### 4장 컴포넌트 상태
+  
+  #### 4.1 컴포넌트의 상태란
+  
+  기존에 데이터를 정의하는 방법은 let, const 를 사용해 변수를 선언하는 것이였는데 
+  react에서는 만약 이 방식으로 변수를 선언하고 값이 변경된다면 
+  화면에는 변화가 나타나지 않습니다.
+  그래서 react에서는 상태로 관리를 해야합니다.
+  
+  #### 4.2 useState 훅: 기본 상태 관리
+  
+  - useState 훅의 기본 문법
+  ```js
+    const [state, setState] = useState<Type>(initalState);
+    /* useState<number>() → 이 state는 숫자만 받는 상태가 됨
+    useState<string>() → 문자열만 받는 상태가 됨 */
+  ```
+  <Type>:  useState 훅으로 정의할 상태 값의 타입을 제네릭으로 지정합니다.
+  타입스크립트에서는 기본으로 타입 추론이 가능하므로 생략하는 경우도 많습니다.
+  기존에는 초깃값을 기준으로 상태 값의 타입을 자동으로 추론합니다.
+  그러나 제네릭을 사용하면 타입을 직접 지정할 수 있어 오류를 줄일 수 있습니다.
+  
+  - 상태 변경 함수
+  1. 상태 값을 직접 전달하는 방식: 상태_변경_함수(값) 
+  ```js
+    const [count, setCount] = useState<number>(0); 
+    setCount(1); // count 값을 1로 변경
+  ```
+  2. 이전 상태 값을 참조하는 방식: 상태_변경_함수((이전_상태_값) => 변경할_상태_값)
+  ```js
+    const [count, setCount] = useState<number>(0); 
+    const increment = () => {
+      setCount((count) => count + 1); // 이전 값에서 1 증가
+    }
+  ```
+  => 알아서 잘~~ 구분해서 사용해야합니다!!!
+  
+  - useState 훅 여러 번 사용하기
+  useState 훅은 한 번에 하나의 상태 값만 관리할 수 있습니다. 따라서 컴포넌트 내부에서 여러개의 상태 값이 필요하면 useState를 여러 번 호출해 각 상태를 따로 정리해야합니다.
+  하지만 상태 개수가 많아지면 코드가 복잡해진다는 단점이 있습니다.
+  이런 경우 여러 상태 값을 하나의 객체로 묶어 관리하는 방법도 있습니다.
+  ```js
+    export default function App () {
+      const [formState, useFormState] = useState({
+        name: '',
+        age: 0,
+        gender: '',
+      });
+    }
+  ```
+  => 이것도 알아서 잘~~ 구분해서 사용해야합니다!!!
+  
+  - useState 훅 사용시 주의사항 
+  1. 초깃값 타입 지정: 초기에 상태가 null 이더라도 나중에 저장할 타입까지 고려해 제네릭을 명시해야 합니다.
+  ```js
+    const [name, setName] = useState<string || null>(null);
+    const [age, setAge] = useState<number || null>(null);
+  ```
+  2. 리액트 훅의 호출 위치: 반드시 함수형 컴포넌트 내부의 최상위에서 호출해야 합니다.
+  3. 상태 변경 함수에서 값을 직접 전달할 때: 리액트는 상태 변경을 즉시 처리하지 않고 비동기적으로 처리해 렌더링이 끝난 뒤 한 번에 모아서 일괄 업데이트합니다.
+  ```js
+    setCount(count+1);
+    setCount(count+1);
+    setCount(count+1);
+    // 이렇게 하면 setCount(count+1) 한번만 적용됩니다.
+    // 대신에 
+    setCount(count+3);
+    // 혹은
+    setCount((count) => count + 1);
+    setCount((count) => count + 1);
+    setCount((count) => count + 1);
+    // 이렇게 적용하도록 합니다.
+  ```
+  #### 4.3 useReducer 훅 : 복잡한 상태 관리
+  react에서 상태 관리를 하는 또 다른 방식입니다.
+  상태 변경 로직이 복잡하거나 업데이트해야하는 경우가 많으면 이 방법을 사용합니다.
+  ```js
+    const [state, dispatch] = useReducer<Type>(reducer, initalState);
+  ```
+  
+  - 사용예시
+  ```js
+    const initialState = { count: 0 };
+  
+    function reducer(state, action) {
+      switch (action.type) {
+        case "INCREMENT":
+          return { count: state.count + 1 };
+        case "DECREMENT":
+          return { count: state.count - 1 };
+        default:
+          return state;
+      }
+    }
+    
+    const [state, dispatch] = useReducer(reducer, initialState);
+    
+    dispatch({ type: "INCREMENT" });
+  ```
+  : [state, dispatch] 부분은 useState 처럼 용도에 따라 이름을 변경하면 됩니다. 
+  ```js
+    const [countState, countDispatch] = useReducer(reducer, initialState);
+    const [form, formDispatch] = useReducer(formReducer, initialForm);
+    const [todoList, todoActions] = useReducer(todoReducer, []);
+  ```
+  
+  - 리듀서 함수 분리하기 
+  리듀서 함수를 분리하면 재사용성과 가독성이 높아지고 체계적으로 관리할 수 있습니다.
+  src/reducer 폴더를 만든 뒤 그 안에 [리듀서이름]Reducer.ts 파일을 생성해서 사용합니다.
+  ```js
+    // exampleReducer.ts
+    export const initialState = { count: 0 };
+    
+    export function exampleReducer(state, action) {
+      switch (action.type) {
+        case "INCREMENT":
+          return { count: state.count + 1 };
+        case "DECREMENT":
+          return { count: state.count - 1 };
+        default:
+          return state;
+      }
+    }
 
-## 💡 느낀 점
+    //app.tsx
+    import { useReducer } from 'react';
+    import { exampleReducer, initialState } from './reducer/exampleReducer';
+    
+    export default function App() {
+      const [state, dispatch] = useReducer(exampleReducer, initialState);
+    
+      return (
+        <>
+          <h1>{state.count}</h1>
+    
+          <button onClick={() => dispatch({ type: "DECREMENT" })}>
+            감소
+          </button>
+    
+          <button onClick={() => dispatch({ type: "INCREMENT" })}>
+            증가
+          </button>
+        </>
+      );
+    }
+  ```
+  
+  #### 4.4 상태 관리 패턴
+  리액트 훅으로 정의한 상태, 상태 변경 함수, 액션 발생 함수는 하나의 데이터처럼 취급합니다.
+  그래서 이를 다른 컴포넌트에 props 처럼 전달해 재사용할 수 있습니다.
+  
+  - typescript 의 경우: 방법 2가지
+  
+  1. 하위 컴포넌트에서 상태 값을 표시 
+  javascript 에서처럼 사용하면 vscode 에서 오류 메세지가 뜨는데 활용해서 작성하면 쉽습니다. 
+  ```js
+    // App.tsx
+    import {useState} from 'react';
+    import Count from './components/Count';
+    
+    export default function App() {
+      cont [count, setCount] = useState(0);
+      return(
+        <>
+          <Count count={count} increment={setCount}>
+        </>
+      )
+    }
+  
+    // Count.tsx
+    import { Dispatch, SetStateAction } from 'react';
+    
+    export default function Count({
+      count, setCount
+    }: { count: number; setCount: Dispatch<SetStateAction<number>> }) {
+      return (
+        <>
+          <h1></h1>
+          <button onClick={()=>setCount((count) => count + 1)}>증가 </button>
+        </>
+      )
+    }
+  ```
+  
+  2. 부모 컴포넌트에서 정의한 후에 전달
+  **캡슐화, 함수의 올바른 사용, 유지보수성, 의도 전달 등의 이유로 이 방법이 더 좋습니다.**
+  ```js
+    // App.tsx
+    import {useState} from 'react';
+    import Count from './components/Count';
+    
+    export default function App() {
+      cont [count, setCount] = useState(0);
+      counst increment = () => setCount((count) => count + 1);
+      return(
+        <>
+          <Count count={count} increment={increment}>
+        </>
+      )
+    }
+    
+    // Count.tsx
+    export default function Count ({
+      count, increment,
+    }: { count: number; increment: () => void; })
+    
+    return (
+      <>
+        <h1>Count: {count}</h1>
+        <button onClick={increment}>증가</button>
+      </>
+    )
+  ```
+  
+  #### 4.5 개발자 도구로 상태 값 확인하기
+  리액트 개발자도구 설치 -> 크롬 개발자 도구에 Components 및 Profiler 탭 추가 확인 -> Components 탭에서 현재 실행된 리액트 애플리케이션의 컴포넌트 구조 확인 -> 각 컴포넌트를 클릭해 해당 컴포넌트의 Props의 state 확인
 
+## 💡 느낀 점 
+  지금 현재 코드잇 강의는 typescript를 듣지 않은 상태라 조금 어렵기는 했으나,
+  javascript 환경에서 하는 법은 배워둔 상태라 비교하면서 예습한다고 생각하며 공부하였습니다.
+  강의에서는 필요한 부분만 바로 알려주다보니 원리가 잘 이해가지 않았는데 
+  책을 읽으면서 하니 react의 기본적인 원리에 대해 이해하고 속성들에 대해 더 이해할 수 있어서 좋았습니다. 
+  typescript 부분은 강의를 한번 더 봐야 100% 이해할 수 있을 것 같습니다.
 
 ## 💡 어려운 점
+  typescript 속성부터 처음 보는 구조와 단어들로 이해하고 사용하기가 어려웠습니다.
+  실습 문제들을 풀어보고 코드잇 강의를 들어야 더 이해가 갈 것 같습니다.
