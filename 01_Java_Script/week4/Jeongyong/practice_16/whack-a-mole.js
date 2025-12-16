@@ -9,7 +9,7 @@ const $$cells = document.querySelectorAll(".cell");
 
 let time = 60;
 let timerId = null; // setInterval ID 저장용
-let tickId = null;
+let tickId = null; // setInterval ID 저장용
 let score = 0;
 let life = 3;
 let isGameOver = false;
