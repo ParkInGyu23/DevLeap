@@ -1,0 +1,7 @@
+button {
+  cursor: pointer;
+  border: none;
+  padding: 10px;
+  margin: 20px;
+  background-color: snow;
+}
