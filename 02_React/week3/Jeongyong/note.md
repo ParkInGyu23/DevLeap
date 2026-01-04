@@ -1,60 +1,160 @@
-# Week 6 개인 정리
+# Week 7 개인 정리
 
 ## ✏️ 배운 내용 요약
 
-## 5장 컴포넌트 스타일링
+## 10장 고유 아이디와 사이드 이펙트
 
-### 인라인 스타일
+### useId 훅
 
-- JSX 요소의 style 속성에 직접 스타일 객체를 지정하는 방식
-- 속성 이름은 카멜 케이스로 작성, 값은 문자열로 지정
+- 컴포넌트마다 고유한 ID 값을 생성하고 관리
 
-### 글로벌 스타일
+### useEffect 훅
 
-- .css 확장자를 가진 파일에 CSS 코드를 작성하고, 이를 컴포넌트에서 import해 적용하는 방식
-- 일반적으로 외부 스타일이라고 함
+- side effect: JSX를 렌더링하는 본래 목적 외에 발생하는 부수적인 행동
+- useEffect 훅은 사이드 이펙트를 처리하기 위해 사용
 
-### CSS 모듈
+### 컴포넌트의 생명주기
 
-- 파일 확장자가 .module.css로 끝나는 파일에 스타일을 작성한 뒤 이를 컴포넌트에서 불러와 사용하는 방식
-- 스타일이 local scope를 가짐, 특정 컴포넌트에만 적용
-- 컴포넌트마다 스타일을 독립적으로 관리할 수 있어 스타일 충돌을 방지할 수 있음
-- 클래스 이름이 고유한 이름으로 자동 변환되기 때문에 다른 컴포넌트와 클래스 이름이 중복되는 문제도 예방할 수 있음
+- 마운트(생성) -> 업데이트(수정) -> 언마운트(소멸)의 과정
 
-### classnames 라이브러리
+### useEfeect 훅 사례
 
-- classnames는 리액트를 포함한 자바스크립트 프레임워크에서 CSS 클래스 이름을 동적으로 조합하고 관리할 수 있게 도와주는 라이브러리
-- 조건에 따라 클래스 이름을 동적으로 추가하거나 제거할 수 있어 스타일을 더욱 유연하고 깔끔하게 적용할 수 있음
+### API 호출하기
 
-## CSS-in-JS
+```js
+import { useEffect } from "react";
 
-- 자바스크립트 파일 안에 스타일을 정의하고 적용하는 방식
-- 동적 스타일링을 매우 쉽게 처리할 수 있음
-- 컴포넌트 단위로 스타일을 작성하므로 클래스 충돌이 없고 재사용성이 높음
-- 상태, props, 조건 등을 바탕으로 동적으로 스타일을 조절할 수 있는 유연성이 있음
+export default function FetchUser() {
+  useEffect(() => {
+    fetch("https://jsonplaceholder.typicode.com/users")
+      .then((response) => response.json())
+      .then((data) => console.log(data));
+  }, []);
+  return <div>FetchUser</div>;
+}
+```
 
-### styled-components
+### 타이머 설정하기
 
-- 자바스크립트 코드 안에 스타일이 적용된 컴포넌트(스타일 컴포넌트)를 생성하는 방식
-- 자바스크립트를 사용해 CSS를 정의하고, 해당 스타일이 적용된 컴포넌트를 바로 만들어 사용할 수 있음
+```js
+import { useEffect, useState } from "react";
 
-### emotion
+export default function Timer() {
+  const [seconds, setSeconds] = useState(0);
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setSeconds((prev) => prev + 1);
+    }, 1000);
+    return () => clearInterval(interval);
+  }, []);
+  return <p>timer : {seconds} seconds</p>;
+}
+```
 
-- 스타일링의 유연성과 성능을 극대화할 수 있도록 설계
-- 간결한 API를 제공해 개발자가 컴포넌트 기반 애플리케이션에서 직관적으로 스타일을 정의하고 관리할 수 있게 함
+### 실시간 이벤트 처리하기
 
-### vanilla-extract
+```js
+import { useEffect } from "react";
 
-- 타입스크립트 기반의 CSS-in-JS 라이브러리
-- 가장 큰 특징은 제로 런타임
-- 제로 런타임은 애플리케이션이 실행될 때 스타일을 생성하거나 적용하는데 추가 비용이 전혀 발생하지 않는다는 의미
+export default function ScrollTracker() {
+  useEffect(() => {
+    const handleScroll = () => {
+      console.log("현재 스크롤 위치:", window.scrollY);
+    };
+    window.addEventListener("scroll", handleScroll);
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
+  return <div style={{ height: "200vh" }}>스크롤해 보세요.</div>;
+}
+```
 
-## Tailwind CSS
+### 자동 저장 기능 구현하기
 
-- 유틸리티 퍼스트 스타일링 철학을 따르는 프레임워크 중에서 가장 인기 있는 라이브러리
-- 유틸리티 퍼스트란 작고 재사용 가능한 유틸리티 클래스를 조합해 스타일을 만드는 방식
-- 각 유틸리티 클래스는 보통 하나의 CSS 속성과 일대일로 대응하며, 이 클래스들을 class 속성에 나열해 원하는 스타일을 만들 수 있음
-- 이런 방식 덕분에 CSS 파일을 따로 작성하지 않고도 HTML이나 JSX 코드 안에서 클래스만으로 스타일을 적용할 수 있음
+```js
+import { useEffect, useState } from "react";
+
+export default function AutoSaveForm() {
+  const [formData, setFormData] = useState("");
+  useEffect(() => {
+    const savedData = localStorage.getItem("savedFormData");
+    if (savedData) {
+      setFormData(savedData);
+    }
+  }, []);
+  useEffect(() => {
+    const timeoutId = setTimeout(() => {
+      localStorage.setItem("savedFormData", formData);
+    }, 1000);
+    return () => clearTimeout(timeoutId);
+  }, [formData]);
+  return (
+    <textarea
+      value={formData}
+      onChange={(e) => setFormData(e.target.value)}
+      placeholder="입력한 내용을 자동으로 저장합니다."
+    />
+  );
+}
+```
+
+### 실시간 통신 기능 구현하기
+
+```js
+import { useEffect, useState } from "react";
+
+export default function SocketTest() {
+  const [messages, setMessages] = useState([]);
+  const [message, setMessage] = useState("");
+  const [socket, setSocket] = useState(null);
+  useEffect(() => {
+    const socket = new WebSocket("wss://echo.websocket.org");
+    setSocket(socket);
+    socket.onmessage = (event) => {
+      setMessages((prev) => [...prev, `서버: ${event.data}`]);
+    };
+    socket.onerror = (error) => {
+      console.error("웹소켓 오류:", error);
+    };
+    socket.onclose = () => {
+      console.log("웹소켓 연결 종료");
+    };
+    return () => {
+      socket.close();
+    };
+  }, []);
+  const handleSendMessage = () => {
+    if (socket && socket.readyState === WebSocket.OPEN && message) {
+      socket.send(message);
+      setMessages((prev) => [...prev, `나: ${message}`]);
+      setMessage("");
+    } else {
+      alert("서버 연결이 끊겼습니다.");
+    }
+  };
+  return (
+    <div>
+      <div>
+        {messages.map((msg, index) => (
+          <div key={index} className="message">
+            {msg}
+          </div>
+        ))}
+      </div>
+      <div>
+        <input
+          type="text"
+          value={message}
+          onChange={(e) => setMessage(e.target.value)}
+          placeholder="메시지를 입력하세요."
+        />
+        <button onClick={handleSendMessage}>전송</button>
+      </div>
+    </div>
+  );
+}
+```
 
 ## 💡 느낀 점
 
