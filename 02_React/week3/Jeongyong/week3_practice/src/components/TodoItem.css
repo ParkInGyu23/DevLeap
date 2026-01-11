@@ -27,3 +27,12 @@
   border-radius: 5px;
   padding: 5px;
 }
+
+.content {
+  transition: opacity 0.2s ease;
+}
+
+.content.done {
+  opacity: 0.5;
+  text-decoration: line-through;
+}

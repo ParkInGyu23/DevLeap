@@ -2,7 +2,7 @@ import { useState } from "react";
 import "./List.css";
 import TodoItem from "./TodoItem";
 
-function List({ todos, onUpdate, onDelete }) {
+function List({ todos, onUpdate, onDelete, isDone }) {
   const [search, setSearch] = useState("");
 
   const onChangeSearch = (e) => {
