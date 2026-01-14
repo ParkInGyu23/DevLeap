@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { useContext, memo } from "react";
 import "./TodoItem.css";
 import { TodoDispatchContext } from "../App";
 
@@ -21,4 +21,4 @@ function TodoItem({ id, isDone, content, date }) {
   );
 }
 
-export default TodoItem;
+export default memo(TodoItem);

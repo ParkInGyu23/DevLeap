@@ -1,8 +1,8 @@
-import { createContext, useMemo, useReducer, useRef, useState } from "react";
+import { createContext, useMemo, useReducer, useRef } from "react";
 import "./App.css";
 import Editor from "./components/Editor";
-import Header from "./components/Header";
 import List from "./components/List";
+import Header from "./components/Header";
 
 const mockData = [
   {
