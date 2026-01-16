@@ -1,0 +1,19 @@
+.diary_list {
+}
+
+.menu_bar {
+  display: flex;
+  gap: 10px;
+  margin: 20px 0;
+}
+
+.menu_bar select {
+  font-size: 18px;
+  padding: 10px 20px;
+  background-color: rgb(236, 236, 236);
+  border-radius: 5px;
+}
+
+.menu_bar button {
+  flex: 1;
+}

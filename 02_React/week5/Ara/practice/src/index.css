@@ -1,0 +1,140 @@
+@charset "utf-8";
+*,
+::after,
+::before,
+button {
+  margin: 0;
+  padding: 0;
+}
+*,
+::after,
+::before,
+button,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+input,
+select,
+table,
+textarea {
+  box-sizing: border-box;
+}
+article,
+aside,
+canvas,
+details,
+figcaption,
+figure,
+footer,
+header,
+mark,
+menu,
+nav,
+section,
+summary {
+  display: block;
+}
+button,
+input,
+select,
+textarea {
+  border-radius: 0;
+}
+a:focus,
+button,
+fieldset,
+iframe,
+img {
+  border: 0;
+}
+li {
+  list-style: none;
+}
+button,
+img,
+input,
+select,
+textarea {
+  vertical-align: middle;
+}
+img {
+  max-width: 100%;
+  height: auto;
+}
+address,
+em,
+optgroup {
+  font-style: normal;
+}
+button,
+label {
+  cursor: pointer;
+}
+label {
+  position: relative;
+}
+button {
+  background: 0 0;
+}
+a {
+  text-decoration: none;
+  color: inherit;
+}
+a:focus {
+  outline: 0;
+}
+caption,
+legend {
+  font-size: 0;
+  width: 0;
+  height: 0;
+  line-height: 0;
+  overflow: hidden;
+  text-indent: -9999px;
+}
+table {
+  width: 100%;
+  border-spacing: 0;
+}
+input,
+select,
+textarea {
+  border: none;
+  outline: none;
+  cursor: pointer;
+}
+
+@font-face {
+  font-family: "Dongle";
+  src: url("/Dongle-Regular.ttf");
+}
+
+* {
+  font-family: "Dongle", sans-serif;
+}
+
+html,
+body {
+  margin: 0;
+  width: 100%;
+  background-color: rgb(246, 246, 246);
+}
+
+body {
+  display: flex;
+}
+
+#root {
+  max-width: 600px;
+  width: 100%;
+  min-height: 100vh;
+  height: 100%;
+  padding: 0 20px;
+  margin: 0 auto;
+  background-color: #fff;
+  box-shadow: rgba(100, 100, 100, 0.2) 0 0 29px 0;
+  transition: all 0.4s;
+}
