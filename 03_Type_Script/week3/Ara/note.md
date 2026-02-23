@@ -311,3 +311,206 @@ promise.catch((err) => {
   }
 });
 ```
+
+## 섹션 8 타입 조작하기
+
+### 인덱스드 엑세스 타입
+
+- 인덱스드 엑세스 타입: 이미 선언된 객체 타입에서 특정 키(Key)를 사용해, 그 키에 해당하는 값의 타입만 추출하여 사용하는 방식
+
+```ts
+  interface Post {
+    title: string;
+    content: string;
+    author: {
+      id: number;
+      name: string;
+      age: number;
+    }
+  }
+
+  // author 객체 전부를 타입으로
+  function porintAuthorInfo(author: Post["author"]) {
+    ...
+  }
+
+   // author 객체에서 id만 타입으로
+  function porintAuthorInfoId(author: Post["author"]["id"]) {
+    ...
+  }
+```
+
+- 배열과 함께 사용
+
+```ts
+  interface PostList {
+    title: string;
+    content: string;
+    author: {
+      id: number;
+      name: string;
+      age: number;
+    }
+  }[];
+
+  function porintAuthorInfo(author: Post[numnrt]["author"]) {
+    ...
+  }
+
+  const post: PostList[0] = {
+    title: "제목",
+    content: "내용",
+    author: {
+      id: 1,
+      name: "이정한",
+      age: 27,
+    }
+  }
+```
+
+- 튜플타입과 함께 사용
+
+```ts
+type Tup = [number, string, boolean];
+
+type Tup0 = Tup[0];
+type TupNum = Tup[number];
+```
+
+### keyof 연산자
+
+- 타입에만 사용할 수 있는 연산자
+- 객체 타입으로부터 타입을 뽑아와서 유니온 타입으로 만들어주는 연산자
+
+```ts
+interface Person {
+  name: string;
+  age: number;
+}
+
+function getPropertyKey(person: Person, key: keyof Person) {
+  return person[key];
+}
+
+type Person = typeof person;
+
+const person = {
+  name: "이정환",
+  age: 27,
+};
+```
+
+### 맵드 타입
+
+- 기존 타입을 기반으로 새로운 타입으로 변환하거나 새로운 프로퍼티를 생성하는 강력한 기능
+- interface 로는 불가능
+- **활용도가 높고, 실무에서도 자주 쓰임**
+
+```ts
+interface User {
+  id: number;
+  name: string;
+  age: number;
+}
+
+type PartialUser = {
+  [key in "id" | "name" | "age"]?: User[key];
+};
+
+// 인덱스트 타입 활용
+type BooleanUser = {
+  [key in keyof User]: boolean;
+};
+
+// readonly
+type ReadonlyUser = {
+  readonly [key in keyof User]: User[key];
+};
+```
+
+### 템플릿 리터럴 타입
+
+- 문자열로 여러가지 상황에 대해 여러가지를 표현할 때 사용
+
+```ts
+type Color = "red" | "black" | "green";
+type Animal = "dog" | "cat" | "chicken";
+type ColoredAnimal = `${Color} - ${Animal}`;
+```
+
+### 맵드 타입
+
+"반복적인 타입 선언을 줄여주는 효율적인 타입 설계 기법"
+
+- 타입의 자동화: 기존 객체 타입의 키들을 하나씩 순회하며 새로운 형태의 타입을 일괄 생성하는 '타입 전용 반복문'입니다.
+- 유지보수의 정석: 원본 타입이 수정되면 맵드 타입으로 파생된 모든 타입이 자동으로 동기화되어, 타입 정의가 누락되거나 어긋나는 실수를 원천 차단합니다.
+- 선택과 제약의 자유: keyof와 인덱스드 엑세스 타입을 결합해, 모든 속성을 선택적(?)으로 만들거나 읽기 전용(readonly)으로 한 번에 변환할 수 있는 강력한 유연성을 제공합니다.
+
+## 섹션 9 조건부 타입
+
+```ts
+type StringNumberSwich<T> = T extends number ? string : number;
+
+let a: StringNumberSwitch<number>;
+let b: StringNumberSwitch<string>;
+```
+
+### 분산적인 조건부 타입
+
+- 분산적인 조건부 타입이 되게 하고 싶지 않다면? 각각에 대괄호를 씌우면 됩니다.
+
+```ts
+let d: StringNumberSwitch<boolen | number | string>;
+
+// 1단계
+// StringNumberSwitch<boolean> |
+// StringNumberSwitch<number> |
+// StringNumberSwitch<string>
+
+// 2단계
+// number |
+// string |
+// number
+
+// 결과
+// number | string
+
+type Excolud<T, U> = T extends U ? never : T;
+type A = Exclude<number | stinrg | boolean, string>;
+
+// never는 최종에 사라지므로
+// 최종은 number | boolean
+```
+
+### infer
+
+조건부 타입에서 특정한 타입만 추론하는 방법
+
+```ts
+type FuncA = () => stirng;
+type FuncB = () => number;
+
+type ReturnType<T> = T extends () => infer R ? R : never;
+
+type A = ReturnType<FuncA>;
+type B = ReturnType<FuncB>;
+```
+
+## 💡핵심 개념 요약
+
+- 제네릭 타입 : 타입을 마치 함수의 인수처럼 전달하여, 하나의 코드가 다양한 타입에 유연하면서도 안전하게 대응할 수 있도록 만드는 '타입 변수' 시스템
+
+```ts
+// 제네릭을 사용한 함수 정의 (T는 타입 변수)
+function identity<T>(arg: T): T {
+  return arg;
+}
+
+// 호출하는 시점에 타입을 결정!
+const s = identity<string>("Gemini"); // T가 string이 됨
+const n = identity<number>(2026); // T가 number가 됨
+```
+
+## 💡 느낀 점 (교재 인사이트)
+
+## 💡 어려운 점 (인상 깊은 아이템 / 이해가 안 가는 내용)
